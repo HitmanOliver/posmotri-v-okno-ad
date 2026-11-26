@@ -8,6 +8,7 @@ html {
   block-size: 100%;
 }
 
+/*  Лейаут и общие стили  */
 .page {
   inline-size: 1200px;
   block-size: 100%;
@@ -16,6 +17,11 @@ html {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   background-color: #1b1919;
+
+  /* Выравниваем .content по центру внутри .page */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1,
@@ -35,6 +41,283 @@ fieldset {
 ul,
 ol {
   list-style: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* Прижимаем к низу */
+  gap: 30px;
+  inline-size: 1140px; /* Ширина с учетом отступов от краев 1200px */
+}
+
+.result {
+  /* Секция с видео и формой */
+  display: flex;
+  flex-direction: column;
+}
+
+/*  Уточнение размеров  */
+.result__video-container {
+  inline-size: 711px;
+  block-size: 386px;
+  margin-block-end: 16px;
+  position: relative; /* Шаг 8: для позиционирования прелоадера */
+}
+
+.result__video {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.search-form {
+  display: flex;
+  justify-content: space-between; /* Пропорционально распределяем */
+  align-items: flex-start; /* Прижимаем к верху */
+}
+
+.content__details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Растягиваем на всю доступную ширину */
+  gap: 26px;
+  block-size: 100%;
+}
+
+.content__list-container {
+  block-size: 298px;
+  overflow-y: auto; /* Добавляем скролл */
+  position: relative; /* для позиционирования прелоадера */
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /*  отступ между кнопкой и карточками */
+}
+
+.content__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Отступы между карточками */
+}
+
+.content__video-card {
+  display: flex;
+  align-items: flex-start; /* Прижимаем к верху */
+}
+
+.content__video-card-thumbnail {
+  block-size: 103px;
+  min-inline-size: 194px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.content__video-card-description-container {
+  flex-grow: 1; /* Занимает всё оставшееся место */
+}
+
+/* Стили текстов */
+.search-form__fieldset-title {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-block-end: 5px;
+}
+
+.title {
+  font-family: Oswald, sans-serif;
+  font-size: 75px;
+  font-weight: 700;
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
+.content__accent {
+  color: #545050;
+}
+
+.content__card-link {
+  text-decoration: none;
+  color: #fff;
+  display: block; /* чтобы отображался фон */
+}
+
+.content__video-card-title {
+  font-family: Oswald, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  
+  /* Обработка переполнения в одну строку */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content__video-card-description {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 18px;
+  line-height: 0.9;
+  margin-block-start: 5px;
+  
+  /* Ограничение в 4 строки с многоточием */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Формы и состояния */
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.search-form__fieldset {
+  border: none;
+}
+
+.search-form__checkbox-list {
+  display: flex;
+  gap: 15px;
+}
+
+.search-form__label {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 5px;
+  cursor: pointer;
+}
+
+/* Подчеркивание при наведении на весь лейбл */
+.search-form__label:hover .search-form__label-text {
+  text-decoration: underline;
+}
+
+/* Стилизация текстового поля */
+.search-form__textfield {
+  border: none;
+  border-block: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  padding-block: 2px;
+  padding-inline: 0;
+  inline-size: 225px;
+  appearance: none; /* Убираем браузерные стили */
+}
+
+.search-form__textfield::placeholder {
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* Убираем обводку у самого инпута в фокусе */
+.search-form__textfield:focus {
+  outline: none;
+}
+
+/* Добавляем обводку лейблу, если внутри него инпут в фокусе (с клавиатуры) */
+.search-form__label:has(.search-form__textfield:focus-visible) {
+  outline: 1px solid #fff;
+}
+
+/* Кастомный чекбокс */
+.search-form__pseudo-checkbox {
+  inline-size: 19px;
+  block-size: 19px;
+  border: 1px solid #fff;
+  padding: 1px; /* Отступ между рамкой и заливкой */
+}
+
+.search-form__pseudo-checkbox::after {
+  content: '';
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: #fff;
+  opacity: 0; /* Скрыт по умолчанию */
+}
+
+/* При выборе чекбокса показываем заливку */
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1;
+}
+
+/* Обводка чекбокса при фокусе */
+.search-form__label:has(.search-form__checkbox:focus-visible) {
+  outline: 1px solid #fff;
+}
+
+/*  Кнопки  */
+.button {
+  border: 1px solid #fff;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  background-color: transparent;
+  cursor: pointer;
+  padding-block: 6px;
+  padding-inline: 0;
+  appearance: none;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+.button:active {
+  background-color: #545050;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 1px solid #fff;
+}
+
+.search-form__submit-button {
+  align-self: flex-end;
+  inline-size: 194px;
+}
+
+.more-button {
+  inline-size: 100%;
+}
+
+/*  Шаг 6. Состояния карточек  */
+.content__list-item {
+  padding-inline: 3px; /* Чтобы обводка не прилипала */
+}
+
+.content__card-link_current {
+  background-color: #545050;
+}
+
+.content__card-link:active {
+  background-color: #545050;
+}
+
+.content__card-link:hover {
+  text-decoration: underline;
+}
+
+.content__card-link:focus {
+  outline: none;
+}
+
+.content__card-link:focus-visible {
+  outline: 1px solid #fff;
 }
 
 /* Кастомный скроллбар */
